@@ -1,0 +1,12 @@
+Third Party Licenses
+====================
+
+-------------------------------------------------------------------------
+Overview
+--------------------------------------------------------------------------
+
+BEVDet: https://github.com/HuangJunJie2017/BEVDet
+License: Apache-2.0 license
+
+Grounded-Segment-Anything: https://github.com/IDEA-Research/Grounded-Segment-Anything
+License: Apache-2.0 license

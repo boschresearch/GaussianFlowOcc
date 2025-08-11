@@ -1,0 +1,11 @@
+lyft_dataset_sdk
+networkx>=2.2,<2.3
+numba
+nuscenes-devkit
+numpy==1.23.5
+ninja==1.11.1
+open3d==0.18.0
+plyfile
+tensorboard
+trimesh>=2.35.39,<2.35.40
+yapf==0.40.1

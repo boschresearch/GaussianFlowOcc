@@ -1,0 +1,9 @@
+addict
+diffusers
+gradio
+huggingface_hub
+onnxruntime
+supervision
+transformers
+nltk
+litellm
