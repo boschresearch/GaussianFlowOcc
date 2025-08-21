@@ -314,36 +314,6 @@ class GaussianFlowOcc(MVXTwoStageDetector):
                                               int(not self.with_others)).squeeze(0).to(torch.uint8).cpu().numpy()
             out_dict['rendered_depths'] = rendered_outs_no_temporal[..., -1].squeeze(0).cpu().numpy()
             
-            # if self.temporal_module is not None:
-            #     offsets = self.temporal_module(feature, [i['selected_frames'][:-1] for i in img_metas])
-            #     means = move_gaussians_temporal_module(means, sem_feature, offsets, self.dynamic_classes)
-
-            #     # Also create occupancy for temporal frames
-            #     out_dict['occupancy_t'] = []
-            #     out_dict['free_space_t'] = []
-            #     for temp_means in means[0, :-1]:
-            #         density_t, semantics_t = self.gaussians_to_occupancy(temp_means, quats[0], scale[0], opacity[0], sem_feature[0])
-            #         if clip_low_density_regions:
-            #             density_t[density_t<1e-3] = 0
-            #             density_t[..., 11:] = 0
-            #         semantics_t = semantics_t.argmax(dim=-1) + int(not self.with_others) # need to add 1, as we do not predict "other"
-            #         free_space_t = torch.stack([density_t < tr for tr in self.eval_threshold_range])
-            #         out_dict['occupancy_t'].append(semantics_t.to(torch.uint8).cpu().numpy())
-            #         out_dict['free_space_t'].append(free_space_t.cpu().numpy())
-
-            #     rendered_outs = self.rasterizer(means, quats, scale, opacity, sem_feature, gs_intrins, gs_extrins, mode='RGB+D')
-            #     out_dict['rendered_semantics_temporal'] = (rendered_outs[..., :-1].argmax(dim=-1) + 
-            #                                     int(not self.with_others)).squeeze(0).to(torch.uint8).cpu().numpy()
-            #     out_dict['rendered_depths_temporal'] = rendered_outs[..., -1].squeeze(0).cpu().numpy()
-            # if self.render_rgb:
-            #     rgb_pred = self.rgb_head(feature)
-            #     if self.sh_degree > 0:
-            #         B, N, C = rgb_pred.shape
-            #         out_dict['rendered_rgb'] = self.rasterizer(means, quats, scale, opacity, rgb_pred.view(B, N, C//3, 3), gs_intrins,
-            #                                             gs_extrins, mode='RGB', sh_degree=self.sh_degree).squeeze(0).cpu().numpy()
-            #     else:
-            #         out_dict['rendered_rgb'] = self.rasterizer(means, quats, scale, opacity, rgb_pred, gs_intrins, gs_extrins, mode='RGB').squeeze(0).cpu().numpy()
-
         # combine density and semantics
         semantics = semantics.argmax(dim=-1) + int(not self.with_others)
         free_space = torch.stack([density < tr for tr in self.eval_threshold_range])

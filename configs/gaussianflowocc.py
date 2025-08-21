@@ -138,7 +138,6 @@ val_pipeline = [
         bda_aug_conf=bda_aug_conf,
         classes=class_names,
         is_train=False),
-    dict(type='GaussianFlowOcc_GenerateLabels_LiDAR', downscale_factor= 1, crop_top=0, temporal_frame_ids=temporal_frame_ids, mask_dynamic=False),
     dict(
         type='MultiScaleFlipAug3D',
         img_scale=(1333, 800),
@@ -149,7 +148,7 @@ val_pipeline = [
                 type='DefaultFormatBundle3D',
                 class_names=class_names,
                 with_label=False),
-            dict(type='Collect3D', keys=['img_inputs', 'gs_intrins', 'gs_extrins'])
+            dict(type='Collect3D', keys=['img_inputs'])
         ])
 ]
 
