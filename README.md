@@ -149,6 +149,13 @@ python tools/test.py configs/gaussianflowocc.py work_dirs/gaussianflowocc/epoch_
 python tools/eval_ray_mIoU.py --pred-dir ./occ/gaussianflowocc
 ```
 
+You can also increase the influence range of each Gaussian during voxelization to potentially increase the accuracy in favor of runtime performance using the `--nbh` parameter. By default, `--nbh` is set to 4.
+
+```shell
+# mIoU & IoU on Occ3D-nuScenes with max_neighborhood of 5
+python tools/test.py configs/gaussianflowocc.py work_dirs/gaussianflowocc/epoch_18_ema.pth --eval mIoU --nbh 5
+```
+
 ## Resume Runs
 If the training is interrupted at any point and you want to resume from a checkpoint, you can simply use the `--resume-from` command as follows:
 ``` shell

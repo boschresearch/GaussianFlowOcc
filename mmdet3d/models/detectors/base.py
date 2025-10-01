@@ -6,7 +6,7 @@ import torch
 from mmcv.parallel import DataContainer as DC
 from mmcv.runner import auto_fp16
 
-from mmdet3d.core import Box3DMode, Coord3DMode, show_result
+from mmdet3d.core import Box3DMode, Coord3DMode
 from mmdet.models.detectors import BaseDetector
 
 
@@ -117,11 +117,3 @@ class Base3DDetector(BaseDetector):
                 ValueError(
                     f'Unsupported box_mode_3d {box_mode_3d} for conversion!')
             pred_bboxes = pred_bboxes.tensor.cpu().numpy()
-            show_result(
-                points,
-                None,
-                pred_bboxes,
-                out_dir,
-                file_name,
-                show=show,
-                pred_labels=pred_labels)

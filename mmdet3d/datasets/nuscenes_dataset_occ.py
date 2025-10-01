@@ -39,7 +39,7 @@ colors_map = np.array(
 class NuScenesDatasetOccpancy(NuScenesDataset):
 
     def __init__(self, *args, eval_threshold_range=[.05, .2, .5], num_classes=18,
-                 gt_root='data/gts', gt_root2='data/gtsv2', eval_metrics = ['mIoU'], version='v1.0-trainval', 
+                 gt_root='data/gts', gt_root2='data/gtsv2', eval_metrics = ['mIoU'],
                  with_others=False, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -73,6 +73,11 @@ class NuScenesDatasetOccpancy(NuScenesDataset):
             gt_semantics = occ_gt['semantics']
             mask_lidar = occ_gt['mask_lidar'].astype(bool)
             mask_camera = occ_gt['mask_camera'].astype(bool)
+
+            # Add other & other_flat to the ignore class
+            if not self.with_others:
+                other_mask = (gt_semantics == 0) | (gt_semantics == 12)
+                mask_camera = mask_camera & (~other_mask)
 
             preds = occ_pred['occupancy']
             for i, t in enumerate(self.eval_threshold_range):

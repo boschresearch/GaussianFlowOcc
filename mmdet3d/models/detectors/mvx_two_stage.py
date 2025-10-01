@@ -10,7 +10,7 @@ from mmcv.runner import force_fp32
 from torch.nn import functional as F
 
 from mmdet3d.core import (Box3DMode, Coord3DMode, bbox3d2result,
-                          merge_aug_bboxes_3d, show_result)
+                          merge_aug_bboxes_3d)
 from mmdet.core import multi_apply
 from .. import builder
 from ..builder import DETECTORS
@@ -500,4 +500,3 @@ class MVXTwoStageDetector(Base3DDetector):
                     f'Unsupported box_mode_3d {box_mode_3d} for conversion!')
 
             pred_bboxes = pred_bboxes.tensor.cpu().numpy()
-            show_result(points, None, pred_bboxes, out_dir, file_name)

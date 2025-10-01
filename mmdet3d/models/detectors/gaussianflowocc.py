@@ -35,7 +35,7 @@ class GaussianFlowOcc(MVXTwoStageDetector):
                  eval_threshold_range=[.1],
                  gaussian_init_scale=2,
                  num_gaussians=10000,
-                 max_neighborhood=3,
+                 max_neighborhood=4,
                  use_opacity=True,
                  use_scale=True,
                  use_rotation=True,

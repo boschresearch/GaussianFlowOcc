@@ -12,7 +12,6 @@ import pyquaternion
 from pyquaternion import Quaternion as Q
 from nuscenes.utils.data_classes import Box as NuScenesBox
 
-from ..core import show_result
 from ..core.bbox import Box3DMode, Coord3DMode, LiDARInstance3DBoxes
 from .builder import DATASETS
 from .custom_3d import Custom3DDataset
@@ -673,8 +672,6 @@ class NuScenesDataset(Custom3DDataset):
             pred_bboxes = result['boxes_3d'][inds].tensor.numpy()
             show_pred_bboxes = Box3DMode.convert(pred_bboxes, Box3DMode.LIDAR,
                                                  Box3DMode.DEPTH)
-            show_result(points, show_gt_bboxes, show_pred_bboxes, out_dir,
-                        file_name, show)
 
 
 def output_to_nusc_box(detection, with_velocity=True):

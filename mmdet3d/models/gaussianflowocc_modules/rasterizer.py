@@ -9,7 +9,7 @@ from mmdet3d.models.losses.ssim import SSIM, CustomSSIM
 
 @HEADS.register_module()
 class GaussianFlowOccRasterizer(nn.Module):
-    def __init__(self, raster_shape=(256, 704), loss_weighting=None, depth_lw=.1, sem_lw=1, rgb_lw=1):
+    def __init__(self, raster_shape=(256, 704), loss_weighting=None, depth_lw=.05, sem_lw=2., rgb_lw=1):
         super().__init__()
         nusc_class_frequencies = torch.tensor([347376232,   7805289,    126214,   4351628,  36046855,   1153917,
             411093,   2137060,    636812,   4397702,  14448748, 316958899,
